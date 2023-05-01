@@ -6,7 +6,6 @@ from xpinyin import Pinyin
 import asyncio
 from pyppeteer import launch
  
-url = "https://gaokao.chsi.com.cn/zyk/pub/myd/specAppraisalTop.action?pageCode=10&start=0"
 async def fetchUrl(url):
 	browser = await launch({'headless': False,'dumpio':True, 'autoClose':True})
 	page = await browser.newPage()
@@ -15,8 +14,20 @@ async def fetchUrl(url):
 	await asyncio.wait([page.waitForNavigation()])
 	str = await page.content()
 	await browser.close()
-	print(str)
-asyncio.get_event_loop().run_until_complete(fetchUrl(url))
+	soup = bs4.BeautifulSoup(str, 'html.parser') 
+	tr = soup.select(".item-yxmc")
+	i = 0;
+	while i<len(tr):
+		a = tr[i].get_text().strip()
+		if a:
+			print(a)
+		i += 1
+j = 0
+while j < 3:
+	url = "https://gaokao.chsi.com.cn/zyk/pub/myd/specAppraisalTop.action?pageCode=10&start=" + str(j * 20)
+	# print(url)
+	asyncio.get_event_loop().run_until_complete(fetchUrl(url))
+	j += 1
 exit()
 
 host = "localhost"
