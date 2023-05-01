@@ -47,16 +47,6 @@ m = 1
 headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36",}
 # 设置cookies
 cookies = {}
-cookies['goaYXsyEWlxdP'] = '5RryNJKA8FsVqqqDom7.efa1zsJiSqutjquRy41g3IOfmnQMJ1qMbD4qyxORFpryvXo.rDirUKMJXdQdqz.aA6b9f9yucW_q1zNl4Fnks1Wc9BxwulrpILdND5QC3YZlF17F8AK1CBlFFMeDuVeGSL8EEBjuKCCU1.IX9cF3YW5Re3iHTzCFXp4TAUi45sGPGg9YpQlIfk3ZGilJAXdgdo5b7vptiweg4sCPL79Vt9eXniqcl1EnrWNupE4m4AHPkeDga0ZyeawYyWWcCaYcv1i'
-cookies['_gat_gtag_UA_100524_6'] = '1'
-cookies['_gid'] = 'GA1.3.1516306352.1679714615'
-cookies['_ga'] = 'GA1.3.1647652790.1679714615'
-cookies['_ga_5FHT145N0D'] = 'GS1.1.1679714614.1.0.1679714614.0.0.0'
-cookies['CHSICC01'] = '!GUl2aSGiBZqHIBvzYxYLahOzddj6YxhwgeUGqaJFWcRWQC/piFJ6jSU3QbTab9VQRksllC+CZgaQBQ=='
-cookies['35067579362dd9cd78'] = 'c58ea6476bd9c117ebaa07bb7def3eea'
-cookies['CHSICC_CLIENTFLAGCHSI'] = '49c3174718c3b560a1040e55b347631e'
-cookies['CHSICC_CLIENTFLAGSPECIALITY'] = '93071bb9fa0a5fe0614a9d2141ddeffe'
-cookies['goaYXsyEWlxdO'] = '591gVF6cDgwdhC5Uc_6ScHyVOVhYjsD_DCEFzZurz8ua8WhpAdunWd2BT5dZMBBVwElsvrIeo8ow59uGb1UsmCG'
 while j<int(page_num):
 	#输出数据量
 	print(j*20) 
