@@ -31,6 +31,7 @@ while j < 3:
 	j += 1
 exit()
 
+# 设置数据库参数
 host = "localhost"
 user = "root"
 passwd = "123456"
