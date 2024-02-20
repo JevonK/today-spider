@@ -5,7 +5,8 @@ import json
 from xpinyin import Pinyin
 import asyncio
 from pyppeteer import launch
- 
+
+# 请求处理
 async def fetchUrl(url):
 	browser = await launch({'headless': False,'dumpio':True, 'autoClose':True})
 	page = await browser.newPage()
@@ -30,6 +31,7 @@ while j < 3:
 	j += 1
 exit()
 
+# 设置数据库参数
 host = "localhost"
 user = "root"
 passwd = "123456"
@@ -115,6 +117,7 @@ while j<int(page_num):
 	   	print(sql1)
 	   	exit()
 	   	db.rollback()
+# 关闭db连接
 db.close()
  
  
