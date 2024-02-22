@@ -24,7 +24,7 @@ async def fetchUrl(url):
 		i += 1
 j = 0
 while j < 3:
-	url = "https://gaokao.chsi.com.cn/zyk/pub/myd/specAppraisalTop.action?pageCode=10&start=" + str(j * 20)
+	url = "https://www.stats.gov.cn/sj/tjbz/tjyqhdmhcxhfdm/2023/index.html"
 	# print(url)
 	asyncio.get_event_loop().run_until_complete(fetchUrl(url))
 	j += 1
@@ -59,48 +59,17 @@ m = 1
 headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36",}
 # 设置cookies
 cookies = {}
+next_base_url = "https://www.stats.gov.cn/sj/tjbz/tjyqhdmhcxhfdm/2023/"
 while j<int(page_num):
 	#输出数据量
 	print(j*20) 
-	res = requests.get('https://gaokao.chsi.com.cn/zyk/pub/myd/specAppraisalTop.action?pageCode=10&start=%s'%(j*20),cookies=cookies, headers=headers, timeout=5) 
+	res = requests.get(next_base_url) 
 	res.raise_for_status() 
 	soup = bs4.BeautifulSoup(res.text, 'html.parser') 
 	tr = soup.select(".item-container")
 	i = 0
 	a = ""
 	a1 = ""
-	while i<len(tr):
-		if i == 0:
-			i += 1
-			continue
-		d = (";" if (i+1) is len(tr) else ",")
-		a += "('%s', '%s')%s" % (tr[i].select('.item-yxmc').get_text().strip(), tr[i].select('td')[1].get_text().strip(), d)
-		#获取学校专业
-		##查询学校
-		res1 = requests.get('https://gaokao.chsi.com.cn/zyk/pub/myd/specAppraisalTop.action?yxmc=%s'%(tr[i].select('td')[0].get_text().strip())) 
-		res1.raise_for_status() 
-		soup1 = bs4.BeautifulSoup(res1.text, 'html.parser') 
-		url = soup1.select('.more-text')
-		##查看全部专业
-		u = 0
-		for x in url:
-			if u > 1:
-				break
-			u = u + 1
-			res1 = requests.get('https://gaokao.chsi.com.cn%s'%(x['href'])) 
-			res1.raise_for_status() 
-			soup1 = bs4.BeautifulSoup(res1.text, 'html.parser') 
-			td = soup1.select(".first_td")
-			j1 = 0
-			while j1<len(td):
-				if j1 == 0:
-					j1 = j1 + 1
-					continue
-				d1 = ','
-				a1 = a1 + "(%s, '%s')%s" % (m, td[j1].get_text().strip(), d1)
-				j1 = j1 + 1
-		i = i + 1
-		m = m + 1
 	#执行新增语句
 	sql = """INSERT INTO school(name, level_text) VALUES """ + a
 	sql1 = """INSERT INTO major(s_id,name) VALUES """ + a1
@@ -108,16 +77,16 @@ while j<int(page_num):
 	try:
 	   	# 执行sql语句	
 	   	cursor.execute(sql)
-	   	cursor.execute(sql1[:-1])
 	   	# 提交到数据库执行
-	   	db.commit()
+        db.commit()
 	except:
 	   	# 如果发生错误则回滚
-	   	print(sql1)
-	   	exit()
+	   	print(sql)
 	   	db.rollback()
 # 关闭db连接
 db.close()
+exit()
+
  
  
  
