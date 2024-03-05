@@ -62,7 +62,7 @@ cookies = {}
 next_base_url = "https://www.stats.gov.cn/sj/tjbz/tjyqhdmhcxhfdm/2023/"
 while j<int(page_num):
 	#输出数据量
-	print(j*20) 
+	print(j*20)    
 	res = requests.get(next_base_url) 
 	res.raise_for_status() 
 	soup = bs4.BeautifulSoup(res.text, 'html.parser') 
